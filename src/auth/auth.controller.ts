@@ -1,3 +1,4 @@
+import { AuthGuard } from '@nestjs/passport';
 import {
     Controller,
     Post,
@@ -21,7 +22,7 @@ import RoleGuard from 'src/users/role.guard';
     constructor(private authService: AuthService) {}
   
     @Post('register')
-    @UseGuards(RoleGuard(Role.ADMIN))
+    @UseGuards(AuthGuard('jwt'), RoleGuard)
     public async register(
       @Body() createUserDto: CreateUserDto,
     ): Promise<RegistrationStatus> {
