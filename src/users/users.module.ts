@@ -6,7 +6,9 @@ import { UsersService } from 'src/@core/application/use-cases/users.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
-  providers: [UsersService],
+  providers: [
+    UsersService,
+  ],
   controllers: [UsersController]
 })
 export class UsersModule {}

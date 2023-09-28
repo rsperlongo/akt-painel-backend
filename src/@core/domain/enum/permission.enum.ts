@@ -1,7 +1,8 @@
 enum Permission {
-    Create = 'Create',
-    Delete = 'Delete',
-    Edit = 'Edit'
+    CREATE = 'Create',
+    DELETE = 'Delete',
+    EDIT = 'Edit',
+    FULL = 'Full'
 }
 
 export default Permission;

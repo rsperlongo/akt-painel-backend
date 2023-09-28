@@ -7,13 +7,13 @@ export class User {
     @PrimaryGeneratedColumn('uuid')
     public id: string;
 
-    @Column()
+    @Column('varchar')
     public name: string;
 
     @Column({ unique: true })
     public username: string
 
-    @Column({ nullable: true })
+    @Column({ unique: true })
     public password: string
 
     @Column()
@@ -22,15 +22,16 @@ export class User {
     @Column({
         type: 'enum',
         enum: Role,
-        array: true
+        array: true,
+        default: [Role.ADMIN]
     })
-    public roles: Role[]
+    public roles: Role[];
 
     @Column({
         type: 'enum',
         enum: Permission,
         array: true,
-        default: []
+        default: [Permission.FULL]
       })
       public permissions: Permission[]
 

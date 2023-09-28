@@ -9,6 +9,7 @@ import { LoginStatus } from 'src/auth/interfaces/login-status.interface';
 import { JwtPayload } from 'src/auth/interfaces/payload.interface';
 import { RegistrationStatus } from 'src/auth/interfaces/registration-status.interface';
 import { UsersService } from './users.use-case';
+import Role from 'src/@core/domain/enum/role.enum';
 
 @Injectable()
 export class AuthService {

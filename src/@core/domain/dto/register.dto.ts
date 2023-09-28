@@ -16,9 +16,17 @@ export class RegisterDto {
   @MinLength(6)
   password: string;
 
+  @IsString()
+  @IsNotEmpty()
+  finalNumber: string;
+
   @IsNotEmpty()
   @IsEnum(Role)
-  type: Role;
+  roles: Role;
+
+  @IsNotEmpty()
+  @IsEnum(Permission)
+  permissions: Permission;
 }
 
 export default RegisterDto;

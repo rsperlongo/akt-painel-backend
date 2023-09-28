@@ -54,7 +54,7 @@ export class UsersService {
 
   async create(userData: CreateUserDto) {
     const newUser = await this.usersRepository.create(userData);
-    return await this.usersRepository.save(newUser);
+    return this.usersRepository.save(newUser);
   }
 
   async findByLogin({ username, password }: LoginUserDto): Promise<UserDto> {
