@@ -21,10 +21,6 @@ export class CreateUserDto {
   finalNumber: string;
 
   @IsNotEmpty()
-  @IsEnum(Role)
-  roles: Role[];
+  roles: Role;
 
-  @IsNotEmpty()
-  @IsEnum(Permission)
-  permissions: Permission[];
 };

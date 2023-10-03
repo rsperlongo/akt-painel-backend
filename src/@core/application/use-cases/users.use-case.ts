@@ -13,6 +13,8 @@ import { CreateUserDto } from 'src/@core/domain/dto/createUser.dto';
 import * as bycript from 'bcrypt';
 import { User } from 'src/@core/domain/entities/user.entity';
 import { UpdateUsersDto } from 'src/@core/domain/dto/Update-user.dto';
+import RegisterDto from 'src/@core/domain/dto/register.dto';
+import { UserResponse } from 'src/@core/domain/type/userResponse';
 
 @Injectable()
 export class UsersService {
@@ -52,9 +54,15 @@ export class UsersService {
     );
   }
 
-  async create(userData: CreateUserDto) {
-    const newUser = await this.usersRepository.create(userData);
-    return this.usersRepository.save(newUser);
+  // async create(userData: CreateUserDto) {
+  //   const newUser = await this.usersRepository.create(userData);
+  //   return this.usersRepository.save(newUser);
+  // }
+  async create(user: CreateUserDto) {
+    const newUser = await this.usersRepository.create(user);
+    await this.usersRepository.save(newUser);
+    const { password, ...userResult } = newUser;
+    return userResult;
   }
 
   async findByLogin({ username, password }: LoginUserDto): Promise<UserDto> {

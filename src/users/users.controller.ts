@@ -11,13 +11,13 @@ export class UsersController {
     return this.usersService.findAll();
   } 
 
-  @Patch('/:id')
+  /* @Patch('/:id')
   async updateUser(
     @Param('id') id: string,
     @Body() updateUser: UpdateUsersDto,
   ): Promise<UpdateUsersDto> {
     return this.usersService.update(id, updateUser);
-  } 
+  }  */
 
   @Delete('/:id')
   async removeUser(@Param('id') id: string) {
