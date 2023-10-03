@@ -12,9 +12,6 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from 'src/@core/domain/dto/createUser.dto';
 import * as bycript from 'bcrypt';
 import { User } from 'src/@core/domain/entities/user.entity';
-import { UpdateUsersDto } from 'src/@core/domain/dto/Update-user.dto';
-import RegisterDto from 'src/@core/domain/dto/register.dto';
-import { UserResponse } from 'src/@core/domain/type/userResponse';
 
 @Injectable()
 export class UsersService {
@@ -23,7 +20,7 @@ export class UsersService {
     private usersRepository: Repository<User>,
   ) {}
 
-  async getByUsername(username: string) {
+  async getByEmail(username: string) {
     const user = await this.usersRepository.findOne({ where: { username } });
     if (user) {
       return user;
@@ -54,15 +51,9 @@ export class UsersService {
     );
   }
 
-  // async create(userData: CreateUserDto) {
-  //   const newUser = await this.usersRepository.create(userData);
-  //   return this.usersRepository.save(newUser);
-  // }
-  async create(user: CreateUserDto) {
-    const newUser = await this.usersRepository.create(user);
-    await this.usersRepository.save(newUser);
-    const { password, ...userResult } = newUser;
-    return userResult;
+  async create(userData: CreateUserDto) {
+    const newUser = await this.usersRepository.create(userData);
+    return await this.usersRepository.save(newUser);
   }
 
   async findByLogin({ username, password }: LoginUserDto): Promise<UserDto> {
@@ -102,15 +93,4 @@ export class UsersService {
     }
     return this.usersRepository.remove(user);
   }
-
-  async update(id: string, updateUser: UpdateUsersDto) {
-    const user = await this.usersRepository.preload({
-        id,
-        ...updateUser
-    });
-    if(!user) {
-        throw new HttpException(`Member ${id} not found`, HttpStatus.NOT_FOUND)
-    }
-    return user;
-}
 }

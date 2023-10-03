@@ -12,8 +12,6 @@ import {
   import { RegistrationStatus } from './interfaces/registration-status.interface';
 import { AuthService } from 'src/@core/application/use-cases/auth.use-case';
 import { LogInDto } from 'src/@core/domain/dto/login.dto';
-import { Roles } from 'src/users/role.decorators';
-import Role from 'src/@core/domain/enum/role.enum';
   
   @Controller('auth')
   export class AuthController {

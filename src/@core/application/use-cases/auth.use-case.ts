@@ -1,15 +1,14 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { UsersService } from '../use-cases/users.use-case';
 import { JwtService } from '@nestjs/jwt';
+import { UserDto } from '../../../@core/domain/dto/users.dto';
 
 import * as bycript from 'bcrypt';
 import { CreateUserDto } from 'src/@core/domain/dto/createUser.dto';
-import { LoginUserDto } from 'src/@core/domain/dto/user-login.dto';
-import { UserDto } from 'src/@core/domain/dto/users.dto';
+import { RegistrationStatus } from 'src/auth/interfaces/registration-status.interface';
+import { LoginUserDto } from 'src/@core/domain/dto/User-login.dto';
 import { LoginStatus } from 'src/auth/interfaces/login-status.interface';
 import { JwtPayload } from 'src/auth/interfaces/payload.interface';
-import { RegistrationStatus } from 'src/auth/interfaces/registration-status.interface';
-import { UsersService } from './users.use-case';
-import Role from 'src/@core/domain/enum/role.enum';
 
 @Injectable()
 export class AuthService {
@@ -30,7 +29,7 @@ export class AuthService {
         ...userDto,
         password: hashedPassword,
       });
-      createdUser.roles = Role[0];
+      createdUser.password = undefined;
     } catch (error) {
       status = {
         success: false,
@@ -76,5 +75,3 @@ export class AuthService {
     };
   }
 }
-
-

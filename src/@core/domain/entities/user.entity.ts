@@ -1,6 +1,4 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import Role from "../enum/role.enum";
-import Permission from "../enum/permission.enum";
 
 @Entity()
 export class User {
@@ -18,17 +16,5 @@ export class User {
 
     @Column()
     public finalNumber: string;
-
-    @Column({
-        type: 'enum',
-        enum: Role,
-        default: Role.ADMIN
-    })
-    public roles: Role;
-
-    @Column({
-        default: 0,
-      })
-      tokenVersion: number;
 
 }

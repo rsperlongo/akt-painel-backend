@@ -1,5 +1,4 @@
 import { IsEnum, IsNotEmpty, IsString, MinLength } from 'class-validator';
-import Role from '../enum/role.enum';
 
 export class RegisterDto {
   @IsString()
@@ -18,10 +17,6 @@ export class RegisterDto {
   @IsString()
   @IsNotEmpty()
   finalNumber: string;
-
-  @IsNotEmpty()
-  @IsEnum(Role)
-  roles: Role;
 }
 
 export default RegisterDto;
