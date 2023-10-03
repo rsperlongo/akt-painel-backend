@@ -26,12 +26,9 @@ export class User {
     })
     public roles: Role;
 
-   /*  @Column({
-        type: 'enum',
-        enum: Permission,
-        array: true,
-        default: [Permission.FULL]
+    @Column({
+        default: 0,
       })
-      public permissions: Permission; */
+      tokenVersion: number;
 
 }

@@ -23,10 +23,6 @@ export class RegisterDto {
   @IsNotEmpty()
   @IsEnum(Role)
   roles: Role;
-
-  @IsNotEmpty()
-  @IsEnum(Permission)
-  permissions: Permission;
 }
 
 export default RegisterDto;
