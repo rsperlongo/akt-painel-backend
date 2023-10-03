@@ -26,9 +26,4 @@ export class User {
     })
     public roles: Role;
 
-    @Column({
-        default: 0,
-      })
-      tokenVersion: number;
-
 }
