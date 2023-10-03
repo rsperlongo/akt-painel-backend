@@ -1,4 +1,3 @@
-import { AuthGuard } from './auth.guard';
 import {
     Controller,
     Post,
