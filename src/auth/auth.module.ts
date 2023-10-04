@@ -9,6 +9,7 @@ import { AuthService } from 'src/@core/application/use-cases/auth.use-case';
 import { UsersService } from 'src/@core/application/use-cases/users.use-case';
 import { JwtStrategy } from './jwt.strategy';
 import { jwtConstants } from './constants';
+import { LocalStrategy } from './local.strategy';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { jwtConstants } from './constants';
     }),
     TypeOrmModule.forFeature([User]),
   ],
-  providers: [AuthService, UsersService, JwtStrategy],
+  providers: [AuthService, UsersService, JwtStrategy, LocalStrategy],
   controllers: [AuthController],
   exports: [PassportModule, JwtModule]
 })

@@ -21,6 +21,6 @@ export class CreateUserDto {
   finalNumber: string;
 
   @IsNotEmpty()
-  roles: Role;
+  roles: Role[];
 
 };

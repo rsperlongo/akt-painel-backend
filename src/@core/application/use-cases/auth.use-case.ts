@@ -30,7 +30,7 @@ export class AuthService {
         ...userDto,
         password: hashedPassword,
       });
-      createdUser.roles = Role[0];
+      createdUser.roles = undefined;
     } catch (error) {
       status = {
         success: false,
