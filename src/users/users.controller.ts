@@ -11,7 +11,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get('')
-  // @UseGuards(RoleGuard(Role.ADMIN))
+  @Roles(Role.ADMIN)
   async getAll() {
     return this.usersService.findAll();
   } 
@@ -28,6 +28,7 @@ export class UsersController {
 
 
   @Put('edit/:id')
+  @Roles(Role.ADMIN)
   async updateUser(
     @Param('id') id: string,
     @Body() updateUser: UpdateUsersDto,
