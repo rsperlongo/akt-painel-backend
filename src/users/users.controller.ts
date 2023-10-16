@@ -3,15 +3,19 @@ import { UsersService } from 'src/@core/application/use-cases/users.use-case';
 import Role from 'src/@core/domain/enum/role.enum';
 import { AuthGuard } from '@nestjs/passport';
 import { Roles } from './role.decorators';
-import RoleGuard from './role.guard';
 import { UpdateUsersDto } from 'src/@core/domain/dto/Update-user.dto';
+import { RoleGuard } from './role.guard';
+import JwtAuthenticationGuard from 'src/auth/jwt-authentication.guard';
 
 @Controller('users')
+@UseGuards(RoleGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
+  
+ 
   @Get('')
   @Roles(Role.ADMIN)
+  @UseGuards(RoleGuard)
   async getAll() {
     return this.usersService.findAll();
   } 

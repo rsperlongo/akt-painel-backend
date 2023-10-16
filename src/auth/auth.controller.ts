@@ -12,13 +12,17 @@ import {
   import { RegistrationStatus } from './interfaces/registration-status.interface';
 import { AuthService } from 'src/@core/application/use-cases/auth.use-case';
 import { LogInDto } from 'src/@core/domain/dto/login.dto';
+import Role from 'src/@core/domain/enum/role.enum';
+import { Roles } from 'src/users/role.decorators';
+import { RoleGuard } from 'src/users/role.guard';
   @Controller('auth')
   export class AuthController {
     constructor(private authService: AuthService) {}
   
 
     @Post('register')
-    // @UseGuards(RoleGuard(Role.ADMIN))
+    @Roles(Role.ADMIN)
+    @UseGuards(RoleGuard)
     public async register(
       @Body() createUserDto: CreateUserDto,
     ): Promise<RegistrationStatus> {

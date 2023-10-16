@@ -1,6 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import Role from "../enum/role.enum";
-import Permission from "../enum/permission.enum";
 
 @Entity()
 export class User {
@@ -21,8 +20,7 @@ export class User {
 
     @Column({
         type: 'enum',
-        enum: Role,
-        default: [Role.ADMIN]
+        enum: Role
     })
     public roles: Role[];
 
