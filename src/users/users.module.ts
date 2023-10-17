@@ -5,7 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/@core/domain/entities/user.entity';
 import { UsersService } from 'src/@core/application/use-cases/users.use-case';
 import { APP_GUARD } from '@nestjs/core';
-import { RoleGuard } from './role.guard';
+import RoleGuard from './role.guard';
 
 @Module({
   imports: [
@@ -14,10 +14,10 @@ import { RoleGuard } from './role.guard';
   ],
   providers: [
     UsersService,
-    {
+   /*  {
       provide: APP_GUARD,
       useClass: RoleGuard
-    }
+    } */
   ],
   controllers: [UsersController],
   exports: [PassportModule]
