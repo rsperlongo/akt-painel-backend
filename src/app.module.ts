@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { InvoiceModule } from './invoice/invoice.module';
 
 @Module({
   imports: [
@@ -22,12 +23,13 @@ import { UsersModule } from './users/users.module';
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
         entities: ['dist/**/*.entity.js'], // 'dist/**/*.entity.{ts,js}'
-        synchronize: true,
+        synchronize: false,
         autoLoadEntities: true,
       }),
     }),
     AuthModule,
     UsersModule,
+    InvoiceModule,
   ],
   controllers: [AppController],
   providers: [AppService],

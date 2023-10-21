@@ -12,7 +12,7 @@ export class UsersController {
   
  
   @Get('')
-  @UseGuards(RoleGuard(Role.ADMIN))
+  // @UseGuards(RoleGuard(Role.ADMIN))
   async getAll() {
     return this.usersService.findAll();
   } 
