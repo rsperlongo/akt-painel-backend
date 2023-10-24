@@ -3,8 +3,8 @@ import { UsersService } from 'src/@core/application/use-cases/users.use-case';
 import Role from 'src/@core/domain/enum/role.enum';
 import { Roles } from './role.decorators';
 import { UpdateUsersDto } from 'src/@core/domain/dto/Update-user.dto';
-import RoleGuard from './role.guard';
 import { AuthGuard } from 'src/auth/auth.guard';
+import { RolesGuard } from './role.guard';
 
 @Controller('users')
 export class UsersController {
@@ -12,7 +12,8 @@ export class UsersController {
   
  
   @Get('')
-  // @UseGuards(RoleGuard(Role.ADMIN))
+  @Roles(Role.ADMIN)
+  @UseGuards(RolesGuard)
   async getAll() {
     return this.usersService.findAll();
   } 
@@ -38,7 +39,7 @@ export class UsersController {
   } 
 
   @Delete('/:id')
-  @UseGuards(RoleGuard(Role.ADMIN))
+  // @UseGuards(RoleGuard(Role.ADMIN))
   // @UseGuards(AuthGuard())
   async removeUser(@Param('id') id: string) {
     return this.usersService.remove(id);
