@@ -1,4 +1,5 @@
 export interface Invoice {
+    id?: number;
     nomeCliente?: string
     valor: string
     dataVencimento: string
@@ -7,7 +8,7 @@ export interface Invoice {
     codigoBarrasPix?: string
     descricao?: string
     nomeAvalistaBoleto?: string
-    tipo?: 'bo' | 'px'
+    tipo?: string
     nomeAvalistaPix?: string
     cidade?: string
   }

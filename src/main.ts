@@ -6,7 +6,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
   const reflector = app.get<Reflector>(Reflector);
   app.useGlobalGuards();
-  app.enableCors();
+  app.enableCors({
+    origin: [
+      'https://sistema-boleto-server-production.up.railway.app'
+    ]
+  });
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
