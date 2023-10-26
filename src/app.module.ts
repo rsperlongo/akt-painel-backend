@@ -23,7 +23,7 @@ import { InvoiceModule } from './invoice/invoice.module';
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
         entities: ['dist/**/*.entity.js'], // 'dist/**/*.entity.{ts,js}'
-        synchronize: false,
+        synchronize: true,
         autoLoadEntities: true,
       }),
     }),
