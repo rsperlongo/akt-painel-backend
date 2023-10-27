@@ -4,8 +4,14 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
-  app.enableCors();
   app.useGlobalGuards();
+  app.enableCors({
+    origin: [
+      'https://sistema-boleto-server-production.up.railway.app',
+      'http://localhost:4200'
+    ]
+  });
+  
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
