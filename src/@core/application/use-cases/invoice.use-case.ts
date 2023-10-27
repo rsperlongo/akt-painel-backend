@@ -1,33 +1,34 @@
 import { HttpService } from "@nestjs/axios";
-import { Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { AxiosResponse } from "axios";
-import { Observable, map } from "rxjs";
+import { InvoiceDto } from "src/@core/domain/dto/invoice.dto";
 import { Invoice } from "src/@core/domain/entities/invoice.entity";
 import { Repository } from "typeorm";
+const express = require('express')
+const app = express()
 
 @Injectable()
 export class InvoiceService {
     constructor(
         @InjectRepository(Invoice)
-        private invoiceRepository: Repository<Invoice>,
-        private readonly httpService: HttpService,
+        private invoiceRepository: Repository<Invoice>
         ) {}
 
-    getInvoiceToken(usuario: string, senha: string): Observable<AxiosResponse<any>> {
-        const url = 'https://sistema-boleto-server-production.up.railway.app';
-        return this.httpService
-        .post(`${url}/users/authenticate`, {
-            usuario,
-            senha,
-        }).pipe(
-            map((res) => res.data?.token)
-        )
+    async storeInvoice(invoiceDto: InvoiceDto) {
+        try {
+        const invoice = await this.invoiceRepository.create(invoiceDto)
+        await this.invoiceRepository.save(invoice)
+
+        const io = app.get('io')
+        io.emit('solicitarBoleto', invoice)
+
+        } catch (error) {
+            throw new HttpException({ 
+                status: HttpStatus.BAD_REQUEST, 
+                error: 'Não foi possível solicitar o boleto' 
+            }, HttpStatus.BAD_REQUEST, {
+                cause: error
+            })
+        }
     }
-
-    async storeInvoice() {
-        const invoice = await this.invoiceRepository.create()
-    }
-
-
 }

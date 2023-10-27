@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { PixModule } from './pix/pix.module';
+import { SocketModule } from './socket/socket.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { PixModule } from './pix/pix.module';
     UsersModule,
     InvoiceModule,
     PixModule,
+    SocketModule,
   ],
   controllers: [AppController],
   providers: [AppService],
