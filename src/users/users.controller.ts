@@ -29,7 +29,7 @@ export class UsersController {
   }
 
 
-  @Put('edit/:id')
+  @Patch('edit/:id')
   @Roles(Role.ADMIN)
   async updateUser(
     @Param('id') id: string,
