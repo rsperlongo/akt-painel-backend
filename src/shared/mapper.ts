@@ -4,7 +4,7 @@ import { User } from 'src/@core/domain/entities/user.entity';
 export const toUserDto = (data: User): UserDto => {
   const { id, username } = data;
 
-  const usersDto: UserDto = {
+  const usersDto : UserDto = {
     id,
     username,
   };

@@ -1,17 +1,36 @@
-import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, UseGuards } from '@nestjs/common';
 import { UsersService } from 'src/@core/application/use-cases/users.use-case';
+import Role from 'src/@core/domain/enum/role.enum';
+import { Roles } from './role.decorators';
 import { UpdateUsersDto } from 'src/@core/domain/dto/Update-user.dto';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { RolesGuard } from './role.guard';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
-  @Get()
+  
+ 
+  @Get('')
+  @Roles(Role.ADMIN)
+  @UseGuards(RolesGuard)
   async getAll() {
     return this.usersService.findAll();
   } 
 
-  @Patch('/:id')
+  @Get('admin')
+  async getAllAdmin() {
+    return this.usersService.findAllAdmin()
+  }
+
+  @Get('operators')
+  async getAllOperators() {
+    return this.usersService.findAllOperators()
+  }
+
+
+  @Patch('edit/:id')
+  @Roles(Role.ADMIN)
   async updateUser(
     @Param('id') id: string,
     @Body() updateUser: UpdateUsersDto,
@@ -20,6 +39,8 @@ export class UsersController {
   } 
 
   @Delete('/:id')
+  @Roles(Role.ADMIN)
+  @UseGuards(RolesGuard)
   async removeUser(@Param('id') id: string) {
     return this.usersService.remove(id);
   }

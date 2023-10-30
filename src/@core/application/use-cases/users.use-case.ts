@@ -8,11 +8,13 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { UserDto } from 'src/@core/domain/dto/Users.dto';
 import { LoginUserDto } from 'src/@core/domain/dto/User-login.dto';
 import { toUserDto } from 'src/shared/mapper';
-import { Repository } from 'typeorm';
+import { Admin, Repository } from 'typeorm';
 import { CreateUserDto } from 'src/@core/domain/dto/createUser.dto';
 import * as bycript from 'bcrypt';
 import { User } from 'src/@core/domain/entities/user.entity';
 import { UpdateUsersDto } from 'src/@core/domain/dto/Update-user.dto';
+import RegisterDto from 'src/@core/domain/dto/register.dto';
+import Role from 'src/@core/domain/enum/role.enum';
 
 @Injectable()
 export class UsersService {
@@ -27,7 +29,7 @@ export class UsersService {
       return user;
     }
     throw new HttpException(
-      'User with this email does not exist',
+      'User with this username does not exist',
       HttpStatus.NOT_FOUND,
     );
   }
@@ -52,9 +54,11 @@ export class UsersService {
     );
   }
 
-  async create(userData: CreateUserDto) {
-    const newUser = await this.usersRepository.create(userData);
-    return this.usersRepository.save(newUser);
+  async create(user: CreateUserDto) {
+    const newUser = await this.usersRepository.create(user);
+    await this.usersRepository.save(newUser);
+    const { password, ...userResult } = newUser;
+    return userResult;
   }
 
   async findByLogin({ username, password }: LoginUserDto): Promise<UserDto> {
@@ -84,13 +88,25 @@ export class UsersService {
     return this.usersRepository.find()
   }
 
+  async findAllAdmin() {
+    return this.usersRepository.findOne({
+      where: { roles: Role.ADMIN }
+    })
+  }
+
+  async findAllOperators() {
+    return this.usersRepository.findOne({
+      where: { roles: Role.OPERATOR }
+    })
+  }
+
   async remove(id: string) {
     const user = await this.usersRepository.findOne({
       where: { id }
     });
 
     if (!user) {
-      throw new NotFoundException(`Product ${id} not found`);
+      throw new NotFoundException(`User ${id} not found`);
     }
     return this.usersRepository.remove(user);
   }

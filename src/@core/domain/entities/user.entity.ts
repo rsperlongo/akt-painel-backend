@@ -22,17 +22,8 @@ export class User {
     @Column({
         type: 'enum',
         enum: Role,
-        array: true,
-        default: [Role.ADMIN]
+        default: Role.OPERATOR
     })
-    public roles: Role[];
-
-    @Column({
-        type: 'enum',
-        enum: Permission,
-        array: true,
-        default: [Permission.FULL]
-      })
-      public permissions: Permission[]
+    public roles: Role;
 
 }

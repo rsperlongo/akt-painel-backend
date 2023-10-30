@@ -1,8 +1,8 @@
-enum Permission {
-    CREATE = 'Create',
-    DELETE = 'Delete',
-    EDIT = 'Edit',
-    FULL = 'Full'
-}
 
-export default Permission;
+enum Permission {
+    DeleteUser = 'DeleteUser',
+    CreateUser = 'CreateUser',
+    UpdateUser = 'UpdateUser'
+  }
+   
+  export default Permission;
