@@ -19,16 +19,17 @@ export class InvoiceService {
         const invoice = await this.invoiceRepository.create(invoiceDto)
         await this.invoiceRepository.save(invoice)
 
-        const io = app.get('io')
-        io.emit('solicitarBoleto', invoice)
-
         } catch (error) {
             throw new HttpException({ 
                 status: HttpStatus.BAD_REQUEST, 
-                error: 'Não foi possível solicitar o boleto' 
+                error: 'Solicitação não deu certo! :(' 
             }, HttpStatus.BAD_REQUEST, {
                 cause: error
             })
         }
+    }
+
+    async getPaymentConfig() {
+        return this.invoiceRepository.find()
     }
 }

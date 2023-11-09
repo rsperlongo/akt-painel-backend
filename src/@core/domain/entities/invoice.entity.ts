@@ -1,4 +1,4 @@
-import { Collection, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Invoice {
@@ -6,32 +6,23 @@ export class Invoice {
     id: number;
 
     @Column()
-    nomeCliente: string
-
-    @Column()
-    valor: string
-
-    @Column()
-    dataVencimento: string
-
-    @Column()
-    codigoCliente: string
-
-    @Column()
-    codigoBarrasPix: string
-
-    @Column()
-    descricao: string
-
-    @Column()
     nomeAvalistaBoleto: string
 
     @Column()
-    tipo: string
+    cpfCnpj: string
+
+    @Column()
+    nomeCliente: string
 
     @Column()
     nomeAvalistaPix: string
 
     @Column()
+    chavePix: string
+
+    @Column()
     cidade: string
+
+    @Column('')
+    codigoTransferencia: string
 }
