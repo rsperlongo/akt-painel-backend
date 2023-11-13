@@ -44,4 +44,11 @@ export class UsersController {
   async removeUser(@Param('id') id: string) {
     return this.usersService.remove(id);
   }
+
+  @Get('/:id')
+  @Roles(Role.ADMIN)
+  @UseGuards(RolesGuard)
+  async getUserById(@Param('id') id: string) {
+    return this.usersService.getById(id)
+  }
 }
