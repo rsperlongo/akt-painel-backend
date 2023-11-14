@@ -112,10 +112,8 @@ export class UsersService {
   }
 
   async update(id: string, updateUser: UpdateUsersDto) {
-    const user = await this.usersRepository.preload({
-        id,
-        ...updateUser
-    });
+      await this.usersRepository.update(id, updateUser);
+      const user = this.usersRepository.findOne({ where: {id}  })
     if(!user) {
         throw new HttpException(`Member ${id} not found`, HttpStatus.NOT_FOUND)
     }

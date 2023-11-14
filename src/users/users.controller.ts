@@ -29,12 +29,12 @@ export class UsersController {
   }
 
 
-  @Patch('edit/:id')
+  @Put('edit/:id')
   @Roles(Role.ADMIN)
   async updateUser(
     @Param('id') id: string,
     @Body() updateUser: UpdateUsersDto,
-  ): Promise<UpdateUsersDto> {
+  ) {
     return this.usersService.update(id, updateUser);
   } 
 
