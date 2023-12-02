@@ -9,7 +9,8 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'https://sistema-boleto-server-production.up.railway.app',
-      'http://localhost:4200'
+      'http://localhost:4200',
+      'https://gerarqrcodepix.com.br/api/v1?nome=${nomeCliente}&cidade=${cidade}&saida=br&chave=${pix}&valor=${valorAPagar}'
     ]
   });
   

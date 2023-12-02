@@ -1,16 +1,15 @@
-import { Body, Controller, HttpException, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
 import { PixService } from 'src/@core/application/use-cases/pix.use-case';
 import { PixDto } from 'src/@core/domain/dto/pix.dto';
-import { RegistrationStatus } from 'src/auth/interfaces/registration-status.interface';
 
 @Controller('')
 export class PixController {
 
     constructor(private pixService: PixService) {}
 
-    @Post('pix')
+    @Get('createpix')
     public async createPix(
-    @Body() pixDto: PixDto) {
-        return this.pixService.storePix(pixDto)
+    @Param() nome: string, cidade: string, chave: string, valor: string, saida?: string) {
+        return this.pixService.createPix(nome, cidade, chave, valor)
     }  
 }

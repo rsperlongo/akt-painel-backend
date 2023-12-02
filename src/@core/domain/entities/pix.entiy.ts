@@ -6,47 +6,17 @@ export class Pix {
     id: number
 
     @Column()
-    valorDesconto: string
-
-    @Column()
-    nomeAvalistaPix: string
-
-    @Column()
-    nomeAtendente: string
-
-    @Column()
-    cpfAtendente: string
-
-    @Column()
-    protocolo: string
-
-    @Column()
-    numeroAcordo: string
-
-    @Column()
-    total: string
-    
-    @Column()
-    nomeCliente: string
-
-    @Column()
-    dataVencimento: string
-
-    @Column()
-    cpfCnpj: string
-
-    @Column()
-    codigoCliente: string
-
-    @Column()
-    codigoBarrasPix: string
-
-    @Column()
-    descricao: string
+    nome: string
 
     @Column()
     cidade: string
 
     @Column()
-    user_id: number
+    saida: string
+
+    @Column()
+    chave: string
+
+    @Column()
+    valor: string
 }

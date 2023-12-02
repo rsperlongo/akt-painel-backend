@@ -5,47 +5,17 @@ export class PixDto {
     id: number
 
     @IsNotEmpty()
-    valorDesconto: string
+    nome: string
 
     @IsNotEmpty()
-    nomeAvalistaPix: string
+    cidade: string
 
     @IsNotEmpty()
-    nomeAtendente: string
+    saida: string
 
     @IsNotEmpty()
-    cpfAtendente: string
+    chave: string
 
     @IsNotEmpty()
-    protocolo: string
-
-    @IsNotEmpty()
-    numeroAcordo: string
-
-    @IsNotEmpty()
-    total: string
-    
-    @IsNotEmpty()
-    nomeCliente: string
-
-    @IsNotEmpty()
-    dataVencimento: string
-
-    @IsOptional()
-    cpfCnpj?: string
-
-    @IsNotEmpty()
-    codigoCliente: string
-
-    @IsOptional()
-    codigoBarrasPix?: string
-
-    @IsOptional()
-    descricao?: string
-
-    @IsOptional()
-    cidade?: string
-
-    @IsOptional()
-    user_id?: number
+    valor: string
   }
